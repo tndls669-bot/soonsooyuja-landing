@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users -maxdepth 4 -iname \"*채수인*\" -o -iname \"*soonsoo*\" -o -iname \"*순수유자*\" 2>/dev/null | grep -v \"Permission denied\")",
+      "Bash(curl -sI \"https://www.organicyuja.com/\")",
+      "Bash(curl -s \"https://www.organicyuja.com/script.js\")",
+      "Bash(curl -sI \"https://soonsoo-yuja.vercel.app/api/sms\")",
+      "Bash(curl -s -X POST \"https://soonsoo-yuja.vercel.app/api/sms\" -H \"Content-Type: application/json\" -d '{\"test\":1}')",
+      "Bash(curl -s -X POST \"https://soonsoo-yuja.vercel.app/api/sms\" -H \"Content-Type: application/json\" -d '{\"name\":\"테스트\",\"phone\":\"010-1234-5678\",\"address\":\"서울시 테스트구\",\"product\":\"순수유자 레몬첼로\",\"qty\":1,\"total\":23000}')",
+      "Bash(npx vercel *)",
+      "Bash(curl -s -X POST https://api.web3forms.com/submit -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{ *)",
+      "Bash(curl -s -X POST https://api.web3forms.com/submit -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Origin: https://www.organicyuja.com' -H 'Referer: https://www.organicyuja.com/' -d '{ *)",
+      "Bash(curl -s -X POST https://api.web3forms.com/submit -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Origin: https://www.organicyuja.com' -H 'Referer: https://www.organicyuja.com/' -H 'User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36' -d '{ *)",
+      "Bash(curl -s -X POST https://script.google.com/macros/s/AKfycbwY2hbsdbyYvzaStNvOGll596Lw07UjZBV6dRMojPUHK83oBiVK5NyG2sYmXVB3y2r0/exec -H 'Content-Type: text/plain;charset=utf-8' -d '{ *)",
+      "Bash(curl -sL -X POST https://script.google.com/macros/s/AKfycbwY2hbsdbyYvzaStNvOGll596Lw07UjZBV6dRMojPUHK83oBiVK5NyG2sYmXVB3y2r0/exec -H 'Content-Type: text/plain;charset=utf-8' -d '{ *)",
+      "Bash(curl -sL --post302 --post303 -X POST https://script.google.com/macros/s/AKfycbwY2hbsdbyYvzaStNvOGll596Lw07UjZBV6dRMojPUHK83oBiVK5NyG2sYmXVB3y2r0/exec -H 'Content-Type: text/plain;charset=utf-8' -d '{ *)",
+      "Bash(curl -s http://localhost:8080/script.js)",
+      "Bash(curl -s http://localhost:8080/index.html)",
+      "Bash(cp \"/g/내 드라이브/ax교육/채수인/랜딩페이지/index.html\" \"/c/Users/tndls/soonsooyuja/index.html\")",
+      "Bash(cp \"/g/내 드라이브/ax교육/채수인/랜딩페이지/script.js\" \"/c/Users/tndls/soonsooyuja/script.js\")",
+      "Bash(cp \"/g/내 드라이브/ax교육/채수인/랜딩페이지/styles.css\" \"/c/Users/tndls/soonsooyuja/styles.css\")",
+      "Bash(curl -s \"https://www.organicyuja.com/\")",
+      "Bash(curl -s \"https://www.organicyuja.com/styles.css\")",
+      "Bash(curl -sI \"https://www.organicyuja.com/styles.css\")",
+      "Bash(curl -s \"https://www.organicyuja.com/\" -o /tmp/live_index.html)",
+      "Read(//tmp/**)",
+      "Bash(mkdir -p 'C:\\\\Users\\\\tndls/imgtool/out')",
+      "Bash(node compress.js '/g/내 드라이브/ax교육/채수인/랜딩페이지/images/calendar' 'C:\\\\Users\\\\tndls/imgtool/out')",
+      "Bash(curl -sI \"https://www.organicyuja.com/images/calendar/month-9.jpg\")",
+      "Bash(curl -sI \"https://www.organicyuja.com/images/calendar/month-1.jpg\")",
+      "Bash(mkdir -p 'C:\\\\Users\\\\tndls/imgtool2/out')",
+      "Bash(node rotate_test.js '/g/내 드라이브/ax교육/채수인/랜딩페이지/images/calendar/month-11.jpg' 'C:\\\\Users\\\\tndls/imgtool2/out')",
+      "Bash(node rotate_test.js '/g/내 드라이브/ax교육/채수인/랜딩페이지/images/calendar/month-12.jpg' 'C:\\\\Users\\\\tndls/imgtool2/out')",
+      "Bash(node -e ' *)",
+      "Bash(node fix_rotation.js)",
+      "Bash(mv -f month-11_fixed.jpg month-11.jpg)",
+      "Bash(mv -f month-12_fixed.jpg month-12.jpg)",
+      "Bash(curl -s \"https://www.organicyuja.com/index.html\")"
+    ]
+  }
+}
