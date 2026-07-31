@@ -13,33 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=4.14">
-
     <!--
-        구조화 데이터 안내:
-        아래는 실제 후기 데이터가 채워진 이후 사용할 Review / AggregateRating 스키마 템플릿입니다.
-        플레이스홀더 상태에서는 검색엔진에 허위 평점을 노출하지 않도록 주석 처리해 두었습니다.
-        실제 후기(작성자, 평점, 내용)가 페이지에 채워지면 아래 값을 실제 데이터로 교체한 뒤 주석을 해제해 주세요.
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "순수유자",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "0.0",
-            "reviewCount": "0"
-        },
-        "review": [
-            {
-                "@type": "Review",
-                "author": { "@type": "Person", "name": "" },
-                "reviewRating": { "@type": "Rating", "ratingValue": "0" },
-                "reviewBody": ""
-            }
-        ]
-    }
-    </script>
+        구조화 데이터(Review / AggregateRating)는 reviews.json의 실제 데이터를 기반으로
+        reviews.js가 런타임에 자동 생성해 <head>에 삽입합니다. 데이터가 없으면 생성하지 않습니다.
     -->
 </head>
 <body>
@@ -83,26 +59,11 @@
                     <p class="shop-subtitle">고객과 인플루언서의 솔직한 후기를 이곳에 모아갑니다. 순차적으로 업데이트될 예정입니다.</p>
                 </div>
 
-                <!-- Placeholder review grid: 실제 후기 등록 전 임시 카드입니다. -->
-                <div class="review-grid">
-                    <div class="review-card is-placeholder">
-                        <div class="review-card-avatar" aria-hidden="true">🍋</div>
-                        <p class="review-card-name">후기 작성자명</p>
-                        <div class="review-card-stars" aria-hidden="true">☆☆☆☆☆</div>
-                        <p class="review-card-body">후기 내용이 준비되는 대로 업데이트됩니다.</p>
-                    </div>
-                    <div class="review-card is-placeholder">
-                        <div class="review-card-avatar" aria-hidden="true">🍋</div>
-                        <p class="review-card-name">후기 작성자명</p>
-                        <div class="review-card-stars" aria-hidden="true">☆☆☆☆☆</div>
-                        <p class="review-card-body">후기 내용이 준비되는 대로 업데이트됩니다.</p>
-                    </div>
-                    <div class="review-card is-placeholder">
-                        <div class="review-card-avatar" aria-hidden="true">🍋</div>
-                        <p class="review-card-name">후기 작성자명</p>
-                        <div class="review-card-stars" aria-hidden="true">☆☆☆☆☆</div>
-                        <p class="review-card-body">후기 내용이 준비되는 대로 업데이트됩니다.</p>
-                    </div>
+                <!-- Reviews are rendered dynamically from reviews.json by reviews.js -->
+                <div class="review-grid" id="review-grid" style="display: none;"></div>
+                <div class="review-empty-state" id="review-empty-state">
+                    <span class="placeholder-icon">🍋</span>
+                    <p>아직 등록된 후기가 없습니다. 순차적으로 업데이트될 예정입니다.</p>
                 </div>
 
                 <div class="reviews-cta">
@@ -247,5 +208,6 @@
     </footer>
 
     <script src="script.js?v=4.14"></script>
+    <script src="reviews.js?v=1"></script>
 </body>
 </html>
