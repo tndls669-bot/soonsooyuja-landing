@@ -3188,26 +3188,13 @@ section {
     justify-content: center;
     background-color: var(--bg-closing);
     border-bottom: 1px solid rgba(250, 248, 245, 0.12);
-    padding: 60px 40px;
+    padding: 180px 40px;
 }
 
 .brand-closing-container {
     max-width: 780px;
     margin: 0 auto;
     text-align: center;
-}
-
-.closing-fact {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    color: var(--bg-primary);
-    opacity: 0;
-    margin-bottom: 48px;
-    transition: opacity 1s ease-out, transform 1s ease-out;
-    transition-delay: 0s;
-    transform: translateY(8px);
 }
 
 .closing-quote {
@@ -3236,11 +3223,6 @@ section {
     transform: translateY(8px);
 }
 
-.brand-closing-section.is-active .closing-fact {
-    opacity: 0.55;
-    transform: translateY(0);
-}
-
 .brand-closing-section.is-active .closing-quote {
     opacity: 1;
     letter-spacing: 0.05em;
@@ -3254,11 +3236,7 @@ section {
 
 @media (max-width: 768px) {
     .brand-closing-section {
-        padding: 50px 24px;
-    }
-
-    .closing-fact {
-        margin-bottom: 32px;
+        padding: 120px 24px;
     }
 
     .closing-quote {
