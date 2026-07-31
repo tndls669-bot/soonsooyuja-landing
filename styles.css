@@ -3194,7 +3194,7 @@ section {
     justify-content: center;
     background-color: var(--bg-closing);
     border-bottom: 1px solid rgba(250, 248, 245, 0.12);
-    padding: 180px 40px;
+    padding: 280px 40px;
 }
 
 .brand-closing-container {
@@ -3242,7 +3242,7 @@ section {
 
 @media (max-width: 768px) {
     .brand-closing-section {
-        padding: 120px 24px;
+        padding: 160px 24px;
     }
 
     .closing-quote {
