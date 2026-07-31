@@ -28,10 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
        Brand Closing Section (replays on every re-entry)
        ========================================================================== */
     const closingSection = document.getElementById('brand-closing');
+    const closingHeaderEl = document.querySelector('.main-header');
 
     if (closingSection) {
         const closingObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // Hide the fixed header entirely while the closing section is in view
+                // (it has no nav by design; a floating header would clip the centered quote)
+                if (closingHeaderEl) {
+                    closingHeaderEl.classList.toggle('header-hidden', entry.isIntersecting);
+                }
+
                 if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
                     closingSection.classList.add('is-active');
                 } else if (!entry.isIntersecting) {
