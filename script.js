@@ -263,6 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Submit Order Handler
+    if (checkoutForm) {
     checkoutForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -322,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateCartBadge();
         }, 600);
     });
+    }
 
     /* ==========================================================================
        5. Reusable Toast Notification Utility

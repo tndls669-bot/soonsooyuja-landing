@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객 후기 | 순수유자 (Soonsoo Yuzu)</title>
+    <!-- Meta SEO -->
+    <meta name="description" content="순수유자(soonsooyuja)를 먼저 만나본 고객과 인플루언서의 솔직한 후기를 모아 보여드립니다. 17년 유기농 유자, 실제로 드셔본 분들의 이야기.">
+    <link rel="canonical" href="https://organicyuja.com/reviews">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css?v=4.14">
+
+    <!--
+        구조화 데이터 안내:
+        아래는 실제 후기 데이터가 채워진 이후 사용할 Review / AggregateRating 스키마 템플릿입니다.
+        플레이스홀더 상태에서는 검색엔진에 허위 평점을 노출하지 않도록 주석 처리해 두었습니다.
+        실제 후기(작성자, 평점, 내용)가 페이지에 채워지면 아래 값을 실제 데이터로 교체한 뒤 주석을 해제해 주세요.
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "순수유자",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "0.0",
+            "reviewCount": "0"
+        },
+        "review": [
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "0" },
+                "reviewBody": ""
+            }
+        ]
+    }
+    </script>
+    -->
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo" id="header-logo">순수유자</a>
+            <nav class="nav-menu">
+                <a href="index.html#product-shop" class="nav-link">구매하기</a>
+                <a href="index.html#shipping-calendar" class="nav-link">캘린더</a>
+                <a href="index.html#brand-identity" class="nav-link">이야기</a>
+                <a href="reviews.html" class="nav-link">후기</a>
+            </nav>
+            <div class="header-actions">
+                <button type="button" class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="메뉴 열기" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <button type="button" class="cart-icon-btn" id="btn-open-cart" aria-label="장바구니 열기">
+                    🛒
+                    <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+                </button>
+                <a href="index.html#product-shop" class="header-cta">시작하기</a>
+            </div>
+        </div>
+        <nav class="mobile-nav-panel" id="mobile-nav-panel">
+            <a href="index.html#product-shop" class="mobile-nav-link">구매하기</a>
+            <a href="index.html#shipping-calendar" class="mobile-nav-link">캘린더</a>
+            <a href="index.html#brand-identity" class="mobile-nav-link">이야기</a>
+            <a href="reviews.html" class="mobile-nav-link">후기</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Reviews Header -->
+        <section class="shop-section reviews-section" id="reviews">
+            <div class="shop-container">
+                <div class="shop-header">
+                    <span class="section-label">REAL REVIEWS</span>
+                    <h1 class="shop-title">순수유자를 먼저 만나본 분들의 이야기</h1>
+                    <p class="shop-subtitle">고객과 인플루언서의 솔직한 후기를 이곳에 모아갑니다. 순차적으로 업데이트될 예정입니다.</p>
+                </div>
+
+                <!-- Placeholder review grid: 실제 후기 등록 전 임시 카드입니다. -->
+                <div class="review-grid">
+                    <div class="review-card is-placeholder">
+                        <div class="review-card-avatar" aria-hidden="true">🍋</div>
+                        <p class="review-card-name">후기 작성자명</p>
+                        <div class="review-card-stars" aria-hidden="true">☆☆☆☆☆</div>
+                        <p class="review-card-body">후기 내용이 준비되는 대로 업데이트됩니다.</p>
+                    </div>
+                    <div class="review-card is-placeholder">
+                        <div class="review-card-avatar" aria-hidden="true">🍋</div>
+                        <p class="review-card-name">후기 작성자명</p>
+                        <div class="review-card-stars" aria-hidden="true">☆☆☆☆☆</div>
+                        <p class="review-card-body">후기 내용이 준비되는 대로 업데이트됩니다.</p>
+                    </div>
+                    <div class="review-card is-placeholder">
+                        <div class="review-card-avatar" aria-hidden="true">🍋</div>
+                        <p class="review-card-name">후기 작성자명</p>
+                        <div class="review-card-stars" aria-hidden="true">☆☆☆☆☆</div>
+                        <p class="review-card-body">후기 내용이 준비되는 대로 업데이트됩니다.</p>
+                    </div>
+                </div>
+
+                <div class="reviews-cta">
+                    <a href="index.html#product-shop" class="header-cta">지금 순수유자 만나보기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Side Purchase Drawer (Premium Checkout UX) -->
+    <div class="purchase-drawer" id="purchase-drawer">
+        <div class="drawer-overlay" id="drawer-overlay"></div>
+        <div class="drawer-content">
+            <button class="btn-close-drawer" id="btn-close-drawer" aria-label="닫기">✕</button>
+
+            <!-- Step 1: Cart Contents & Purchase Method Choice -->
+            <div class="drawer-step-1" id="drawer-step-1">
+                <div class="drawer-header">
+                    <h3>장바구니</h3>
+                    <p>담으신 상품을 확인하고 구매 방식을 선택해 주세요.</p>
+                </div>
+                <div class="drawer-body">
+                    <div class="cart-items-list" id="cart-items-list"></div>
+                    <div class="cart-empty-state" id="cart-empty-state" style="display: none;">
+                        <p>장바구니가 비어 있습니다.</p>
+                        <span>원하시는 상품을 '장바구니 담기'로 추가해 주세요.</span>
+                    </div>
+
+                    <div class="cart-total-row" id="cart-total-row">
+                        <span>총 상품 금액</span>
+                        <strong id="cart-total-price">0원</strong>
+                    </div>
+
+                    <div class="method-selection-box" id="method-selection-box" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                        <a href="https://smartstore.naver.com/organicyuja" target="_blank" class="btn-method btn-smartstore" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; border-radius: 12px; background-color: #03c75a; color: white; text-decoration: none; font-weight: 600; text-align: center; transition: background-color 0.2s; box-shadow: 0 4px 10px rgba(3, 199, 90, 0.15);">
+                            <span style="font-size: 1.05rem;">네이버 스마트스토어 구매 ↗</span>
+                            <span style="font-size: 0.75rem; font-weight: 400; opacity: 0.9; margin-top: 3px;">네이버페이 및 카드 결제 가능</span>
+                        </a>
+                        <button type="button" class="btn-method btn-direct" id="btn-go-direct-order" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; border-radius: 12px; border: 1px solid var(--color-olive); background-color: var(--bg-secondary); color: var(--color-olive); font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(46, 89, 54, 0.08);">
+                            <span style="font-size: 1.05rem;">직접 입금 주문서 작성</span>
+                            <span style="font-size: 0.75rem; font-weight: 400; opacity: 0.8; margin-top: 3px;">계좌이체 / 구매내역 자동 접수</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Direct Order Form & Account Copy -->
+            <div class="drawer-step-2" id="drawer-step-2" style="display: none;">
+                <div class="drawer-header" style="position: relative;">
+                    <button class="btn-prev-step" id="btn-prev-step" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1rem; color: var(--color-olive); cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 4px; padding: 0;">← 이전</button>
+                    <h3 style="text-align: center; margin: 0 auto; width: fit-content;">주문서 작성</h3>
+                </div>
+                <div class="drawer-body">
+                    <div class="order-summary-list" id="order-summary-list"></div>
+                    <form class="checkout-form" id="checkout-form" onsubmit="event.preventDefault();">
+                        <div class="form-group">
+                            <label for="buyer-name">주문자 성함</label>
+                            <input type="text" id="buyer-name" required placeholder="성함을 입력해 주세요.">
+                        </div>
+                        <div class="form-group">
+                            <label for="buyer-phone">연락처</label>
+                            <input type="tel" id="buyer-phone" required placeholder="010-0000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="buyer-address">배송지 주소</label>
+                            <input type="text" id="buyer-address" required placeholder="상세 주소를 입력해 주세요.">
+                        </div>
+
+                        <!-- Account & Price Copy Widget -->
+                        <div class="account-copy-box" style="margin-top: 20px; padding: 15px; border-radius: 12px; border: 1px dashed var(--border-color); background-color: var(--bg-secondary); border-color: rgba(46, 89, 54, 0.25);">
+                            <div style="font-size: 0.8rem; color: var(--color-muted); margin-bottom: 6px;">입금 계좌 정보</div>
+                            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-primary); word-break: keep-all; line-height: 1.4;">카카오뱅크 3333-19-3570222 채수인</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(43, 34, 30, 0.08);">
+                                <span style="font-size: 0.85rem; color: var(--color-muted);">총 입금액:</span>
+                                <strong id="copy-total-amount" style="font-size: 1rem; color: var(--color-olive);">23,000원</strong>
+                            </div>
+                            <button type="button" class="btn-copy-account" id="btn-copy-account" style="width: 100%; margin-top: 12px; padding: 10px; border-radius: 8px; border: none; background-color: var(--color-olive); color: white; font-weight: 500; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s;">
+                                <span>📋 계좌 및 금액 통합 복사</span>
+                            </button>
+                        </div>
+
+                        <div class="shipping-fee-box" style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(43, 34, 30, 0.08); color: var(--color-muted);">
+                            <span>배송비</span>
+                            <span>무료 배송</span>
+                        </div>
+                        <div class="total-summary" style="margin-top: 15px; border-top: 1px solid rgba(43, 34, 30, 0.08); padding-top: 15px;">
+                            <span>최종 결제 금액</span>
+                            <strong id="total-price-val">23,000원</strong>
+                        </div>
+                        <button type="submit" class="btn-submit-order" id="btn-place-order" style="margin-top: 20px;">결제하고 주문하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toast-notification">
+        <span class="toast-message" id="toast-message">상품이 장바구니에 담겼습니다.</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3 class="footer-logo">순수유자</h3>
+                <p class="footer-brand-desc">원물의 정직함과 아버지가 17년간 일궈온 유기농 유자밭의 가치를 담아냅니다.</p>
+            </div>
+
+            <div class="footer-details">
+                <div class="detail-column">
+                    <h4>ECO CERTIFIED</h4>
+                    <p>전남 고흥군 유기농 생과 100%</p>
+                    <p>농림축산식품부 유기농산물 인증</p>
+                    <p>저탄소 인증 및 유기농업자재 사용</p>
+                </div>
+                <div class="detail-column">
+                    <h4>ZERO-WASTE & ETHICAL</h4>
+                    <p>친환경 생분해 포장재 사용</p>
+                    <p>유리병 배송 및 환경 보호 실천</p>
+                    <p>유기농 토양 건강 보전 실천</p>
+                </div>
+                <div class="detail-column">
+                    <h4>CUSTOMER CARE</h4>
+                    <p>고객센터: 010-8842-9670</p>
+                    <p>이메일: tndls669@naver.com</p>
+                    <a href="https://www.instagram.com/soonsoo.yuza/" target="_blank" class="footer-link">인스타그램 ↗</a>
+                    <a href="https://brunch.co.kr/@d7f781c9d8f9415" target="_blank" class="footer-link">작가 브런치 ↗</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="flex-direction: column; align-items: flex-start; gap: 10px;">
+            <p style="line-height: 1.6; color: #8C7E74;">
+                상호명: 순수유자 | 대표자: 채수인 | 개인정보관리책임자: 채수인<br>
+                소재지: 전남 고흥군 도덕면 고흥로 540-32 (봉덕리) 2층 | 대표자 이메일: tndls669@naver.com | 문의: 010-8842-9670<br>
+                사업자등록번호: 215-95-18845 | 통신판매업신고번호: 2024-전남 고흥-0106 | 호스팅제공자: (주)아임웹
+            </p>
+            <p style="margin-top: 10px; width: 100%; display: flex; justify-content: space-between; color: #8C7E74;">
+                <span>&copy; 2026 순수유자 (Soonsoo Yuzu). All Rights Reserved.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=4.14"></script>
+</body>
+</html>
