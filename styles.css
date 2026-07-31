@@ -1485,7 +1485,7 @@ section {
    Section 6: Footer
    ========================================================================== */
 .main-footer {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-closing);
     color: #DFD7CE;
     padding: 100px 0 50px 0;
     border-top: var(--border-subtle);
