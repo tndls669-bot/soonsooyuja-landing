@@ -24,7 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(element);
     });
 
+    /* ==========================================================================
+       Brand Closing Section (replays on every re-entry)
+       ========================================================================== */
+    const closingSection = document.getElementById('brand-closing');
 
+    if (closingSection) {
+        const closingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+                    closingSection.classList.add('is-active');
+                } else if (!entry.isIntersecting) {
+                    closingSection.classList.remove('is-active');
+                }
+            });
+        }, {
+            root: null,
+            threshold: [0, 0.4, 0.5]
+        });
+
+        closingObserver.observe(closingSection);
+    }
 
 
 

@@ -13,6 +13,7 @@
     --bg-primary: #FAF8F5;       /* Warm Cream Ivory */
     --bg-secondary: #F3EDE2;     /* Kraft Package Beige */
     --bg-dark: #2E5936;          /* Deep Forest Green */
+    --bg-closing: #2B1B12;       /* Warm Espresso Brown (Brand Closing section) */
     
     --color-primary: #3E3A36;    /* Dark Charcoal Gray-Brown */
     --color-olive: #2E5936;      /* Forest Green */
@@ -3176,6 +3177,92 @@ section {
     }
     .details-image-wrapper {
         height: 220px;
+    }
+}
+
+/* Brand Closing Section */
+.brand-closing-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-closing);
+    border-bottom: 1px solid rgba(250, 248, 245, 0.12);
+    padding: 60px 40px;
+}
+
+.brand-closing-container {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.closing-fact {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--bg-primary);
+    opacity: 0;
+    margin-bottom: 48px;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    transition-delay: 0s;
+    transform: translateY(8px);
+}
+
+.closing-quote {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(1.75rem, 1rem + 3vw, 3rem);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bg-primary);
+    opacity: 0;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px;
+    transition: opacity 1.8s ease-out, letter-spacing 1.8s ease-out, transform 1.8s ease-out;
+    transition-delay: 0.4s;
+    transform: translateY(8px);
+}
+
+.closing-source {
+    font-family: var(--font-sans);
+    font-size: clamp(0.85rem, 0.6rem + 0.6vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--bg-primary);
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    transition-delay: 0.9s;
+    transform: translateY(8px);
+}
+
+.brand-closing-section.is-active .closing-fact {
+    opacity: 0.55;
+    transform: translateY(0);
+}
+
+.brand-closing-section.is-active .closing-quote {
+    opacity: 1;
+    letter-spacing: 0.05em;
+    transform: translateY(0);
+}
+
+.brand-closing-section.is-active .closing-source {
+    opacity: 0.55;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .brand-closing-section {
+        padding: 50px 24px;
+    }
+
+    .closing-fact {
+        margin-bottom: 32px;
+    }
+
+    .closing-quote {
+        margin-bottom: 24px;
     }
 }
 
