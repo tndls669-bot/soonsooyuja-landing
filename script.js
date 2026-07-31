@@ -413,6 +413,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Keyboard access: Enter/Space activates cert cards, Escape closes the modal
+    document.querySelectorAll('.verified-card[role="button"]').forEach(card => {
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            window.closeSyModal();
+        }
+    });
+
     // FAQ Accordion Toggle
     const faqQuestions = document.querySelectorAll('.faq-question');
     faqQuestions.forEach(btn => {
