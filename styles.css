@@ -3197,19 +3197,6 @@ section {
     text-align: center;
 }
 
-.closing-fact {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    color: var(--bg-primary);
-    opacity: 0;
-    margin-bottom: 48px;
-    transition: opacity 1s ease-out, transform 1s ease-out;
-    transition-delay: 0s;
-    transform: translateY(8px);
-}
-
 .closing-quote {
     font-family: 'Noto Serif KR', serif;
     font-size: clamp(1.75rem, 1rem + 3vw, 3rem);
@@ -3220,8 +3207,8 @@ section {
     letter-spacing: -0.02em;
     margin: 0 0 32px;
     transition: opacity 1.8s ease-out, letter-spacing 1.8s ease-out, transform 1.8s ease-out;
-    transition-delay: 0.4s;
-    transform: translateY(8px);
+    transition-delay: 0.15s;
+    transform: translateY(16px);
 }
 
 .closing-source {
@@ -3231,14 +3218,9 @@ section {
     letter-spacing: 0.1em;
     color: var(--bg-primary);
     opacity: 0;
-    transition: opacity 1s ease-out, transform 1s ease-out;
-    transition-delay: 0.9s;
-    transform: translateY(8px);
-}
-
-.brand-closing-section.is-active .closing-fact {
-    opacity: 0.55;
-    transform: translateY(0);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    transition-delay: 0.55s;
+    transform: translateY(12px);
 }
 
 .brand-closing-section.is-active .closing-quote {
@@ -3255,10 +3237,6 @@ section {
 @media (max-width: 768px) {
     .brand-closing-section {
         padding: 50px 24px;
-    }
-
-    .closing-fact {
-        margin-bottom: 32px;
     }
 
     .closing-quote {
