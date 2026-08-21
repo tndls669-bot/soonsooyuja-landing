@@ -1116,6 +1116,29 @@ section {
     font-size: 1.05rem;
 }
 
+.price-tier-list label.tier-row {
+    cursor: pointer;
+}
+
+.tier-select-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-tier-list input[type="radio"] {
+    accent-color: var(--color-olive);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.price-tier-list label.tier-row:has(input:checked) .tier-weight,
+.price-tier-list label.tier-row:has(input:checked) .tier-price {
+    color: var(--color-olive);
+}
+
 .btn-buy.is-disabled {
     background-color: transparent;
     border-color: rgba(122, 117, 112, 0.35);

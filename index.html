@@ -63,7 +63,7 @@
                 "@id": "https://organicyuja.com/#product-original",
                 "name": "순수유자 디오가닉 오리지널",
                 "description": "유기농 유자 50%(전남 고흥산)로 담근 500g 유자청.",
-                "image": "https://organicyuja.com/images/product_original.jpg",
+                "image": "https://organicyuja.com/images/product_original_v2.png",
                 "brand": { "@type": "Brand", "name": "순수유자" },
                 "offers": {
                     "@type": "Offer",
@@ -78,7 +78,7 @@
                 "@id": "https://organicyuja.com/#product-lowsugar",
                 "name": "순수유자 로우슈가",
                 "description": "유기농 유자 50%(전남 고흥산)와 알룰로오스로 담근 저당 500g 유자청.",
-                "image": "https://organicyuja.com/images/product_lowsugar.jpg",
+                "image": "https://organicyuja.com/images/product_lowsugar_v2.png",
                 "brand": { "@type": "Brand", "name": "순수유자" },
                 "offers": {
                     "@type": "Offer",
@@ -220,7 +220,7 @@
                         <!-- Product 2 -->
                         <div class="swiper-slide product-card">
                             <div class="product-image-container">
-                                <img src="images/product_original.jpg" alt="순수유자 디오가닉 오리지널" class="product-image">
+                                <img src="images/product_original_v2.png" alt="순수유자 디오가닉 오리지널" class="product-image">
                             </div>
                             <div class="product-info">
                                 <h3 class="product-name">순수유자 디오가닉 오리지널</h3>
@@ -234,7 +234,7 @@
                         <div class="swiper-slide product-card">
                             <div class="product-image-container">
                                 <span class="product-badge low-sugar">저당</span>
-                                <img src="images/product_lowsugar.jpg" alt="순수유자 로우슈가" class="product-image">
+                                <img src="images/product_lowsugar_v2.png" alt="순수유자 로우슈가" class="product-image">
                             </div>
                             <div class="product-info">
                                 <h3 class="product-name">순수유자 로우슈가</h3>
@@ -272,21 +272,30 @@
                         <div class="product-info">
                             <h3 class="product-name">유기농 청유자 생과</h3>
                             <p class="product-volume">덜 익은 풋유자 · 청 담그기용 무세척 생과 (예약 접수중 · 8월 25일 출하 예정)</p>
-                            <div class="price-tier-list">
-                                <div class="tier-row">
-                                    <span class="tier-weight">500g</span>
+                            <div class="price-tier-list" role="radiogroup" aria-label="유기농 청유자 생과 중량 선택">
+                                <label class="tier-row">
+                                    <span class="tier-select-left">
+                                        <input type="radio" name="cheongyuza-tier" value="500g|18000" checked>
+                                        <span class="tier-weight">500g</span>
+                                    </span>
                                     <span class="tier-price">18,000원</span>
-                                </div>
-                                <div class="tier-row">
-                                    <span class="tier-weight">1kg</span>
+                                </label>
+                                <label class="tier-row">
+                                    <span class="tier-select-left">
+                                        <input type="radio" name="cheongyuza-tier" value="1kg|29000">
+                                        <span class="tier-weight">1kg</span>
+                                    </span>
                                     <span class="tier-price">29,000원</span>
-                                </div>
-                                <div class="tier-row">
-                                    <span class="tier-weight">3kg</span>
+                                </label>
+                                <label class="tier-row">
+                                    <span class="tier-select-left">
+                                        <input type="radio" name="cheongyuza-tier" value="3kg|76000">
+                                        <span class="tier-weight">3kg</span>
+                                    </span>
                                     <span class="tier-price">76,000원</span>
-                                </div>
+                                </label>
                             </div>
-                            <button class="btn-buy" data-product="유기농 청유자 생과 (500g, 예약)" data-price="18000">예약하기 (500g)</button>
+                            <button class="btn-buy" data-product-base="유기농 청유자 생과" data-tier-group="cheongyuza-tier">예약하기</button>
                         </div>
                     </div>
 

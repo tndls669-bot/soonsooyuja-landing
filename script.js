@@ -203,6 +203,17 @@ document.addEventListener('DOMContentLoaded', () => {
     buyButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+
+            const tierGroup = btn.getAttribute('data-tier-group');
+            if (tierGroup) {
+                const checkedTier = document.querySelector(`input[name="${tierGroup}"]:checked`);
+                if (!checkedTier) return;
+                const [weight, price] = checkedTier.value.split('|');
+                const productBase = btn.getAttribute('data-product-base') || '';
+                addToCart(`${productBase} (${weight}, 예약)`, parseInt(price, 10));
+                return;
+            }
+
             const productName = btn.getAttribute('data-product');
             const price = parseInt(btn.getAttribute('data-price'), 10) || 23000;
             addToCart(productName, price);
