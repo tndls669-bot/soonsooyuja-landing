@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!checkedTier) return;
                 const [weight, price] = checkedTier.value.split('|');
                 const productBase = btn.getAttribute('data-product-base') || '';
-                addToCart(`${productBase} (${weight}, 예약)`, parseInt(price, 10));
+                addToCart(`${productBase} (${weight})`, parseInt(price, 10));
                 return;
             }
 

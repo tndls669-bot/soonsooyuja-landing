@@ -961,6 +961,11 @@ section {
     color: var(--bg-primary);
 }
 
+.product-badge.in-stock {
+    background-color: var(--color-olive);
+    color: var(--bg-primary);
+}
+
 .product-info {
     display: flex;
     flex-direction: column;
