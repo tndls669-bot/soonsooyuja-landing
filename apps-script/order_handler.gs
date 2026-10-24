@@ -35,7 +35,10 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
     var order = saveOrder_(data);
 
-    var smsResult = sendSms_(order.phone,
+    // 주문서는 누구나 보낼 수 있어서, 장난 주문이 몰리면 대표님 폰에서 모르는 번호로 문자가
+    // 대량으로 나갈 수 있다. 자동 접수 문자에만 하루 한도와 같은 번호 재발송 간격을 둔다.
+    var limit = orderSmsAllowed_(order.phone);
+    var smsResult = limit !== true ? limit : sendSms_(order.phone,
       '[순수유자] ' + order.name + '님 주문이 접수되었습니다.\n' +
       '입금계좌: ' + BANK_ACCOUNT + '\n' +
       '입금액: ' + formatWon_(order.total) + '\n' +
@@ -101,6 +104,7 @@ function orderEmailHtml_(order, smsResult) {
 
 function doGet(e) {
   var p = (e && e.parameter) || {};
+  if (p.action === 'export') return exportPaid_(p.key);
   if (!p.id || !p.t) return page_('잘못된 링크입니다.', '');
 
   var found = findOrder_(p.id, p.t);
@@ -120,7 +124,7 @@ function doGet(e) {
     return page_('입금을 확인하셨나요?', summary +
       '<br><br><a href="' + url + '" target="_top" style="display:inline-block;padding:16px 28px;' +
       'background:#2E5936;color:#fff;border-radius:10px;text-decoration:none;font-size:18px;font-weight:bold;">' +
-      '입금 확인 · 고객에게 문자 보내기</a>');
+      '금액 맞음 · 감사 문자 보내기</a>' + aiPanelHtml_(p.id, p.t, o));
   }
 
   var smsResult = sendSms_(o.phone, paidMessage_(o));
@@ -133,10 +137,124 @@ function doGet(e) {
 }
 
 function paidMessage_(o) {
-  var shipping = String(o.product).indexOf('예약') !== -1
-    ? '예약 상품은 11월 중순부터 순차 배송됩니다.'
-    : '상품은 순차적으로 발송되며, 발송되면 다시 안내드리겠습니다.';
-  return '[순수유자] ' + o.name + '님 ' + formatWon_(o.total) + ' 입금 확인되었습니다. 감사합니다.\n' + shipping;
+  var isReservation = String(o.product).indexOf('예약') !== -1;
+  var shipping = isReservation
+    ? '예약하신 유자는 11월 중순부터 잘 익은 열매로 정성껏 골라 순서대로 보내드릴게요.'
+    : '정성껏 준비해서 보내드릴게요.';
+  return '[순수유자] ' + o.name + '님, ' + formatWon_(o.total) + ' 입금 잘 받았습니다.\n' +
+    '고흥 유기농 유자 농장 순수유자를 믿고 주문해 주셔서 진심으로 감사드립니다.\n' +
+    shipping + '\n' +
+    '발송되면 다시 연락드릴게요. 따뜻한 하루 보내세요.\n' +
+    '- 순수유자 채수인 드림';
+}
+
+// ---------------------------------------------------------------- 금액이 다를 때: 대표님 판단 → AI 문자
+// 입금액이 많거나 적은 경우처럼 정해진 문구로 안 되는 상황은, 대표님이 판단만 적으면
+// Gemini가 순수유자 말투로 문자를 쓰고, 대표님이 미리보기를 확인한 뒤 보낸다.
+// AI가 쓴 문자는 대표님이 "보내기"를 누르기 전에는 절대 나가지 않는다.
+
+var GEMINI_MODEL = 'gemini-3.8-flash';
+
+function aiPanelHtml_(id, token, o) {
+  return '<div style="margin-top:36px;padding-top:20px;border-top:1px solid #ddd;text-align:left;">' +
+    '<b>금액이 다르거나 따로 안내할 게 있나요?</b><br>' +
+    '<span style="font-size:13px;color:#777;">판단만 적으시면 AI가 문자를 써요. 보내기 전에 확인할 수 있어요.</span><br><br>' +
+    '실제 들어온 금액 (모르면 비워두세요)<br>' +
+    '<input id="amt" inputmode="numeric" placeholder="예: 83400" style="width:100%;padding:10px;font-size:16px;box-sizing:border-box;"><br><br>' +
+    '대표님 판단<br>' +
+    '<textarea id="memo" rows="3" placeholder="예: 3천원 덜 들어왔으니 추가 입금 부탁 / 2천원 더 들어와서 돌려드릴게, 계좌 물어봐" ' +
+    'style="width:100%;padding:10px;font-size:16px;box-sizing:border-box;"></textarea><br>' +
+    '<label style="font-size:14px;"><input type="checkbox" id="done"> 이 문자로 입금 확인 처리하기 (시트 입금완료)</label><br><br>' +
+    '<button onclick="draft()" style="width:100%;padding:14px;font-size:16px;background:#8a6d3b;color:#fff;border:0;border-radius:10px;">AI로 문자 만들기</button>' +
+    '<div id="preview" style="display:none;margin-top:20px;">미리보기 (고쳐도 돼요)<br>' +
+    '<textarea id="msg" rows="8" style="width:100%;padding:10px;font-size:15px;box-sizing:border-box;"></textarea><br><br>' +
+    '<button onclick="send()" style="width:100%;padding:14px;font-size:16px;background:#2E5936;color:#fff;border:0;border-radius:10px;">이 문자 보내기</button></div>' +
+    '<p id="status" style="color:#2E5936;font-weight:bold;"></p></div>' +
+    '<script>var ID=' + JSON.stringify(String(id)) + ',T=' + JSON.stringify(String(token)) + ';' +
+    'function st(s){document.getElementById("status").textContent=s;}' +
+    'function draft(){var m=document.getElementById("memo").value.trim();if(!m){st("판단을 적어주세요.");return;}st("AI가 문자를 쓰는 중...");' +
+    'google.script.run.withSuccessHandler(function(t){document.getElementById("msg").value=t;document.getElementById("preview").style.display="block";st("");})' +
+    '.withFailureHandler(function(e){st("실패: "+e.message);}).aiDraft(ID,T,document.getElementById("amt").value,m);}' +
+    'function send(){var t=document.getElementById("msg").value.trim();if(!t)return;st("보내는 중...");' +
+    'google.script.run.withSuccessHandler(function(r){st(r);document.getElementById("preview").style.display="none";})' +
+    '.withFailureHandler(function(e){st("실패: "+e.message);}).aiSend(ID,T,t,document.getElementById("done").checked);}' +
+    '</script>';
+}
+
+/** 확인 화면에서 호출: 대표님 판단 → 고객 문자 초안 */
+function aiDraft(id, token, amt, memo) {
+  var found = findOrder_(String(id), String(token));
+  if (!found) throw new Error('주문을 찾을 수 없어요.');
+  var o = found.order;
+  var paid = Number(String(amt || '').replace(/[^0-9]/g, '')) || 0;
+  var amountLine = '주문 금액: ' + formatWon_(o.total);
+  if (paid) {
+    var diff = paid - Number(o.total);
+    amountLine += ' / 실제 입금: ' + formatWon_(paid) +
+      (diff === 0 ? ' (금액 같음)' : diff < 0 ? ' / ' + formatWon_(-diff) + ' 부족' : ' / ' + formatWon_(diff) + ' 초과');
+  }
+  var prompt =
+    '너는 고흥 유기농 유자 농장 "순수유자" 대표 채수인 대신 고객에게 보낼 문자를 쓴다.\n' +
+    '아래 "대표님 판단"의 내용을 고객에게 전하는 따뜻하고 정중한 한국어 문자로 써라.\n' +
+    '규칙:\n' +
+    '- 첫 줄은 "[순수유자] ' + o.name + '님," 으로 시작한다.\n' +
+    '- 마지막 줄은 "- 순수유자 채수인 드림" 으로 끝낸다.\n' +
+    '- 금액·계좌·날짜는 아래에 주어진 값만 그대로 쓴다. 없는 사실을 지어내지 않는다.\n' +
+    '- 추가 입금을 부탁할 때만 입금계좌를 적는다.\n' +
+    '- 6줄 이내, 이모지 없이, 문자 본문만 출력한다.\n\n' +
+    '고객 이름: ' + o.name + '\n상품: ' + o.product + '\n' + amountLine + '\n입금계좌: ' + BANK_ACCOUNT + '\n' +
+    '대표님 판단: ' + memo;
+  return callGemini_(prompt);
+}
+
+/** 확인 화면에서 호출: 대표님이 확인한 문자를 보낸다 */
+function aiSend(id, token, text, done) {
+  var found = findOrder_(String(id), String(token));
+  if (!found) throw new Error('주문을 찾을 수 없어요.');
+  var smsResult = sendSms_(found.order.phone, String(text));
+  setCell_(found.row, COL.SMS_PAID, '[직접안내] ' + smsResult);
+  if (done) {
+    setCell_(found.row, COL.STATUS, STATUS_PAID);
+    setCell_(found.row, COL.PAID_AT, Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyy-MM-dd HH:mm'));
+  }
+  return '고객 문자: ' + smsResult + (done ? ' · 입금완료로 처리했어요' : '');
+}
+
+function callGemini_(prompt) {
+  var key = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  if (!key) throw new Error('스크립트 속성에 GEMINI_API_KEY가 없어요.');
+  var res = UrlFetchApp.fetch(
+    'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent?key=' + encodeURIComponent(key),
+    { method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+      payload: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+  if (res.getResponseCode() !== 200) throw new Error('AI 호출 실패 (' + res.getResponseCode() + ')');
+  var data = JSON.parse(res.getContentText());
+  return String(data.candidates[0].content.parts[0].text).trim();
+}
+
+// ---------------------------------------------------------------- 배송 자동화 연결
+// PC의 배송 자동화(1단계 주문 수집)가 입금완료 주문을 가져가 우체국 접수 목록에 넣는다.
+// 고객 주소·연락처가 담겨 있으므로 스크립트 속성 PIPELINE_KEY와 같은 key를 줄 때만 답한다.
+
+function exportPaid_(key) {
+  var expected = PropertiesService.getScriptProperties().getProperty('PIPELINE_KEY');
+  if (!expected || key !== expected) return json_({ success: false, error: 'unauthorized' });
+  var sheet = getSheet_();
+  var last = sheet.getLastRow();
+  var orders = [];
+  if (last >= 2) {
+    var rows = sheet.getRange(2, 1, last - 1, HEADERS.length).getValues();
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      if (r[COL.STATUS - 1] !== STATUS_PAID) continue;
+      orders.push({
+        id: String(r[COL.ID - 1]), name: String(r[COL.NAME - 1]), phone: String(r[COL.PHONE - 1]),
+        address: String(r[COL.ADDRESS - 1]), product: String(r[COL.PRODUCT - 1]),
+        qty: r[COL.QTY - 1], total: r[COL.TOTAL - 1], paidAt: String(r[COL.PAID_AT - 1])
+      });
+    }
+  }
+  return json_({ success: true, orders: orders });
 }
 
 function findOrder_(id, token) {
@@ -178,6 +296,27 @@ function sendSms_(phone, text) {
   } catch (err) {
     return '발송 실패 (' + err + ')';
   }
+}
+
+var ORDER_SMS_DAILY_LIMIT = 30;       // 하루 자동 접수 문자 최대 건수
+var ORDER_SMS_SAME_PHONE_SECONDS = 600; // 같은 번호로는 10분에 한 번만
+
+/** 자동 접수 문자를 보내도 되면 true, 아니면 시트·메일에 남길 사유 문장. */
+function orderSmsAllowed_(phone) {
+  var to = String(phone || '').replace(/[^0-9]/g, '');
+  var cache = CacheService.getScriptCache();
+  if (cache.get('sms_' + to)) return '미발송 (같은 번호 10분 내 재주문)';
+
+  // 날짜별로 속성을 새로 만들면 스크립트 속성 목록이 매일 늘어나므로 한 칸("날짜:건수")에 덮어쓴다.
+  var props = PropertiesService.getScriptProperties();
+  var today = Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyyMMdd');
+  var saved = String(props.getProperty('SMS_DAILY_COUNT') || '').split(':');
+  var count = saved[0] === today ? Number(saved[1] || 0) : 0;
+  if (count >= ORDER_SMS_DAILY_LIMIT) return '미발송 (하루 자동 문자 한도 ' + ORDER_SMS_DAILY_LIMIT + '건 초과)';
+
+  props.setProperty('SMS_DAILY_COUNT', today + ':' + (count + 1));
+  cache.put('sms_' + to, '1', ORDER_SMS_SAME_PHONE_SECONDS);
+  return true;
 }
 
 /** 편집기에서 한 번 실행: 권한 승인 + 주문 시트 생성 */
