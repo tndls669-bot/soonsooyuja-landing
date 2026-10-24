@@ -120,6 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return cart.length ? itemsTotal + SHIPPING_FEE : 0;
     }
 
+    // Orders placed directly on this site (bank transfer) get 10% off; Smartstore keeps list price
+    const DIRECT_ORDER_DISCOUNT_RATE = 0.1;
+
+    function directOrderDiscount() {
+        return Math.round(cartTotal() * DIRECT_ORDER_DISCOUNT_RATE);
+    }
+
+    function directOrderTotal() {
+        return cartTotal() - directOrderDiscount();
+    }
+
     function updateCartBadge() {
         const count = cart.reduce((sum, item) => sum + item.qty, 0);
         if (count > 0) {
@@ -274,7 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
             orderSummaryList.appendChild(row);
         });
 
-        const total = cartTotal();
+        const discountRow = document.createElement('div');
+        discountRow.className = 'order-summary-item order-summary-discount';
+        discountRow.innerHTML = `<span>홈페이지 직접 주문 10% 할인</span><span>-${directOrderDiscount().toLocaleString()}원</span>`;
+        orderSummaryList.appendChild(discountRow);
+
+        const total = directOrderTotal();
         totalPriceVal.textContent = total.toLocaleString() + '원';
 
         const copyTotalAmountEl = document.getElementById('copy-total-amount');
@@ -287,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCopyAccount = document.getElementById('btn-copy-account');
     if (btnCopyAccount) {
         btnCopyAccount.addEventListener('click', () => {
-            const totalAmount = cartTotal();
+            const totalAmount = directOrderTotal();
             const bankAccountInfo = "카카오뱅크 3333-19-3570222 채수인";
             const textToCopy = `${bankAccountInfo} ${totalAmount.toLocaleString()}원`;
 
@@ -308,8 +324,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const buyerName = document.getElementById('buyer-name').value;
         const buyerPhone = document.getElementById('buyer-phone').value;
         const buyerAddress = document.getElementById('buyer-address').value;
-        const totalAmount = cartTotal();
-        const productSummary = cart.map(item => `${item.name} x${item.qty}`).join(', ');
+        const totalAmount = directOrderTotal();
+        const productSummary = cart.map(item => `${item.name} x${item.qty}`).join(', ')
+            + ` [직접주문 10% 할인 적용: 정가 ${cartTotal().toLocaleString()}원 → ${totalAmount.toLocaleString()}원]`;
         const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
         closeDrawer();
