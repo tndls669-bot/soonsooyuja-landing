@@ -263,36 +263,30 @@
                     <!-- 청유자 (Green Yuzu) -->
                     <div class="product-card fruit-product-card">
                         <div class="product-image-container">
-                            <span class="product-badge in-stock">판매중</span>
+                            <div class="soldout-overlay">
+                                <span class="soldout-tag">SOLD OUT</span>
+                                <span class="soldout-eta">올해 시즌 마감</span>
+                            </div>
                             <img src="images/product_cheongyuza_raw.png" alt="유기농 청유자 생과" class="product-image">
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">유기농 청유자 생과</h3>
                             <p class="product-volume">덜 익은 풋유자 · 청 담그기용 무세척 생과</p>
-                            <div class="price-tier-list" role="radiogroup" aria-label="유기농 청유자 생과 중량 선택">
-                                <label class="tier-row">
-                                    <span class="tier-select-left">
-                                        <input type="radio" name="cheongyuza-tier" value="500g|18000" checked>
-                                        <span class="tier-weight">500g</span>
-                                    </span>
+                            <div class="price-tier-list">
+                                <div class="tier-row">
+                                    <span class="tier-weight">500g</span>
                                     <span class="tier-price">18,000원</span>
-                                </label>
-                                <label class="tier-row">
-                                    <span class="tier-select-left">
-                                        <input type="radio" name="cheongyuza-tier" value="1kg|29000">
-                                        <span class="tier-weight">1kg</span>
-                                    </span>
+                                </div>
+                                <div class="tier-row">
+                                    <span class="tier-weight">1kg</span>
                                     <span class="tier-price">29,000원</span>
-                                </label>
-                                <label class="tier-row">
-                                    <span class="tier-select-left">
-                                        <input type="radio" name="cheongyuza-tier" value="3kg|76000">
-                                        <span class="tier-weight">3kg</span>
-                                    </span>
+                                </div>
+                                <div class="tier-row">
+                                    <span class="tier-weight">3kg</span>
                                     <span class="tier-price">76,000원</span>
-                                </label>
+                                </div>
                             </div>
-                            <button class="btn-buy" data-product-base="유기농 청유자 생과" data-tier-group="cheongyuza-tier">장바구니 담기</button>
+                            <button class="btn-buy is-disabled" disabled>품절</button>
                         </div>
                     </div>
 
@@ -300,29 +294,38 @@
                     <div class="product-card fruit-product-card">
                         <div class="product-image-container">
                             <div class="soldout-overlay">
-                                <span class="soldout-tag">SOLD OUT</span>
-                                <span class="soldout-eta">11월 오픈 예정</span>
+                                <span class="soldout-tag">예약중</span>
+                                <span class="soldout-eta">11월 중순 출하 예정</span>
                             </div>
                             <img src="images/product_yuza_raw.png" alt="유기농 유자 생과" class="product-image">
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">유기농 유자 생과</h3>
-                            <p class="product-volume">완숙 유자 · 청 담그기용 무세척 생과</p>
-                            <div class="price-tier-list">
-                                <div class="tier-row">
-                                    <span class="tier-weight">1kg</span>
+                            <p class="product-volume">완숙 유자 · 청 담그기용 무세척 생과 (예약 접수중 · 11월 중순 출하 예정)</p>
+                            <div class="price-tier-list" role="radiogroup" aria-label="유기농 유자 생과 중량 선택">
+                                <label class="tier-row">
+                                    <span class="tier-select-left">
+                                        <input type="radio" name="yuza-tier" value="1kg|17000" checked>
+                                        <span class="tier-weight">1kg</span>
+                                    </span>
                                     <span class="tier-price">17,000원</span>
-                                </div>
-                                <div class="tier-row">
-                                    <span class="tier-weight">3kg</span>
+                                </label>
+                                <label class="tier-row">
+                                    <span class="tier-select-left">
+                                        <input type="radio" name="yuza-tier" value="3kg|42000">
+                                        <span class="tier-weight">3kg</span>
+                                    </span>
                                     <span class="tier-price">42,000원</span>
-                                </div>
-                                <div class="tier-row">
-                                    <span class="tier-weight">8kg</span>
+                                </label>
+                                <label class="tier-row">
+                                    <span class="tier-select-left">
+                                        <input type="radio" name="yuza-tier" value="8kg|96000">
+                                        <span class="tier-weight">8kg</span>
+                                    </span>
                                     <span class="tier-price">96,000원</span>
-                                </div>
+                                </label>
                             </div>
-                            <button class="btn-buy is-disabled" disabled>11월 오픈 예정</button>
+                            <button class="btn-buy" data-product-base="유기농 유자 생과 예약" data-tier-group="yuza-tier">예약하기</button>
                         </div>
                     </div>
                 </div>
