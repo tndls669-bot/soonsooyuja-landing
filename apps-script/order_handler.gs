@@ -20,10 +20,11 @@ var SHEET_NAME = '순수유자 홈페이지 주문';
 
 var COL = {
   ID: 1, CREATED: 2, NAME: 3, PHONE: 4, ADDRESS: 5, PRODUCT: 6, QTY: 7,
-  TOTAL: 8, STATUS: 9, PAID_AT: 10, TOKEN: 11, SMS_ORDER: 12, SMS_PAID: 13
+  TOTAL: 8, STATUS: 9, PAID_AT: 10, TOKEN: 11, SMS_ORDER: 12, SMS_PAID: 13,
+  SEASON_ALERT: 14
 };
 var HEADERS = ['주문번호', '접수시각', '주문자', '연락처', '주소', '상품', '수량',
-  '입금액', '상태', '입금확인시각', '확인토큰', '접수문자', '입금문자'];
+  '입금액', '상태', '입금확인시각', '확인토큰', '접수문자', '입금문자', '출하알림동의'];
 
 var STATUS_WAITING = '입금대기';
 var STATUS_PAID = '입금완료';
@@ -67,14 +68,17 @@ function saveOrder_(data) {
       Math.floor(Math.random() * 900 + 100);
     var token = Utilities.getUuid();
     var total = Number(data.total) || 0;
+    // 내년 출하 알림 문자 수신 동의(선택, 광고성 정보). 동의 시각을 남겨 2년마다 재확인할 근거로 쓴다.
+    var seasonAlert = data.seasonAlert === true
+      ? '동의 ' + Utilities.formatDate(now, 'Asia/Seoul', 'yyyy-MM-dd HH:mm') : '';
 
     sheet.appendRow([id, now, data.name, data.phone, data.address, data.product,
-      data.qty, total, STATUS_WAITING, '', token, '', '']);
+      data.qty, total, STATUS_WAITING, '', token, '', '', seasonAlert]);
 
     return {
       row: sheet.getLastRow(), id: id, token: token, name: data.name,
       phone: data.phone, address: data.address, product: data.product,
-      qty: data.qty, total: total
+      qty: data.qty, total: total, seasonAlert: seasonAlert
     };
   } finally {
     lock.releaseLock();
@@ -91,7 +95,8 @@ function orderEmailHtml_(order, smsResult) {
     '배송주소: ' + esc_(order.address) + '<br>' +
     '상품명: ' + esc_(order.product) + '<br>' +
     '수량: ' + esc_(order.qty) + '<br>' +
-    '<b>입금액: ' + formatWon_(order.total) + '</b></p>' +
+    '<b>입금액: ' + formatWon_(order.total) + '</b><br>' +
+    '내년 출하 알림 문자: ' + (order.seasonAlert ? '동의' : '미동의') + '</p>' +
     '<p>고객 접수 문자: ' + esc_(smsResult) + '</p>' +
     '<p>카카오뱅크에 <b>' + esc_(order.name) + ' ' + formatWon_(order.total) +
     '</b> 입금이 들어오면 아래 버튼을 눌러주세요.</p>' +
@@ -346,6 +351,9 @@ function getSheet_() {
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
+  } else if (!sheet.getRange(1, COL.SEASON_ALERT).getValue()) {
+    // 출하알림동의 칸은 2026-11-06에 추가 — 기존 시트에는 머리글만 채운다.
+    sheet.getRange(1, COL.SEASON_ALERT).setValue(HEADERS[COL.SEASON_ALERT - 1]);
   }
   return sheet;
 }

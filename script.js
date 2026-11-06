@@ -266,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnGoDirectOrder.addEventListener('click', () => {
             if (cart.length === 0) return;
             renderOrderSummary();
+            updateSeasonAlertVisibility();
             drawerStep1.style.display = 'none';
             drawerStep2.style.display = 'block';
         });
@@ -274,6 +275,20 @@ document.addEventListener('DOMContentLoaded', () => {
             drawerStep2.style.display = 'none';
             drawerStep1.style.display = 'block';
         });
+    }
+
+    // 생과를 담은 주문에만 "내년 출하 알림 문자" 수신 동의(선택)를 보여준다. 기본은 체크 해제.
+    function cartHasFreshYuja() {
+        return cart.some(item => item.name.includes('생과'));
+    }
+
+    function updateSeasonAlertVisibility() {
+        const group = document.getElementById('season-alert-group');
+        const box = document.getElementById('season-alert-consent');
+        if (!group || !box) return;
+        const show = cartHasFreshYuja();
+        group.style.display = show ? 'block' : 'none';
+        if (!show) box.checked = false;
     }
 
     function renderOrderSummary() {
@@ -328,6 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const productSummary = cart.map(item => `${item.name} x${item.qty}`).join(', ')
             + ` [직접주문 10% 할인 적용: 정가 ${cartTotal().toLocaleString()}원 → ${totalAmount.toLocaleString()}원]`;
         const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+        const seasonAlertBox = document.getElementById('season-alert-consent');
+        const seasonAlert = cartHasFreshYuja() && !!(seasonAlertBox && seasonAlertBox.checked);
 
         closeDrawer();
 
@@ -351,7 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 address: buyerAddress,
                 product: productSummary,
                 qty: totalQty,
-                total: totalAmount
+                total: totalAmount,
+                seasonAlert: seasonAlert
             })
         })
         .then(response => response.json())

@@ -713,6 +713,16 @@
                             <label for="buyer-address">배송지 주소</label>
                             <input type="text" id="buyer-address" required placeholder="상세 주소를 입력해 주세요.">
                         </div>
+                        <!-- 생과 주문에만 보이는 출하 알림 수신 동의(선택, 광고성 정보) -->
+                        <div class="form-group season-alert-group" id="season-alert-group" style="display: none;">
+                            <label for="season-alert-consent" style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; font-weight: 500;">
+                                <input type="checkbox" id="season-alert-consent" style="width: auto; margin-top: 3px; flex-shrink: 0;">
+                                <span>[선택] 내년 햇유자 출하가 시작되면 문자로 알려주세요.</span>
+                            </label>
+                            <p style="font-size: 0.75rem; color: var(--color-muted); margin: 6px 0 0 26px; line-height: 1.5; word-break: keep-all;">
+                                광고성 정보(출하 소식) 수신 동의 · 수집 항목: 이름, 연락처 · 이용 목적: 매년 유기농 유자 생과 출하 안내 · 보유 기간: 동의 철회 시까지. 동의하지 않아도 주문할 수 있으며, 문자에 '거부'라고 답하시면 언제든 철회됩니다.
+                            </p>
+                        </div>
                         
                         <!-- Account & Price Copy Widget -->
                         <div class="account-copy-box" style="margin-top: 20px; padding: 15px; border-radius: 12px; border: 1px dashed var(--border-color); background-color: var(--bg-secondary); border-color: rgba(46, 89, 54, 0.25);">
