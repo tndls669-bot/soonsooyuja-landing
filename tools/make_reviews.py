@@ -24,6 +24,7 @@ import openpyxl  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 MIN_SHOW = 4
 SCHEMA_REVIEWS = 20
+EXCLUDE = {"레드향"}  # 더 이상 팔지 않는 상품(2026-11-27 대표님) — 통계·목록 모두에서 뺀다
 
 
 def category(name):
@@ -52,6 +53,8 @@ def load(paths):
     for d in rows.values():
         text = (d.get("리뷰상세내용") or "").strip()
         if d.get("전시상태") != "정상" or not text:
+            continue
+        if category(d.get("상품명") or "") in EXCLUDE:
             continue
         y, m, dd = re.match(r"(\d{4})\.(\d{2})\.(\d{2})", d["리뷰등록일"]).groups()
         out.append({
