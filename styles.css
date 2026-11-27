@@ -3565,3 +3565,9 @@ section {
         text-align: center;
     }
 }
+
+.product-season-note {
+    font-size: 0.8rem;
+    color: var(--color-olive);
+    margin: -6px 0 14px;
+}
