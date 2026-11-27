@@ -543,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
             imgSrc: "images/calendar/month-1.jpg?v=3.6",
             subHtml: `<div class="info-tag-box">
                         <span class="info-tag">🌱 유기농 원칙: 토양의 생명력이 건강한 유기농 유자 껍질을 만듭니다.</span>
+                        <span class="info-tag">🍋 유자 생과는 1월 중순까지 저장해 둔 유자로 판매합니다.</span>
                       </div>`
         },
         2: {
@@ -648,7 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: "황유자 완숙기",
             badgeClass: "badge-yellow",
             title: "12월: 완숙 황유자 수확 종료 및 생산 마감",
-            desc: "유자 본연의 화려하고 진한 완숙 향이 가득 차오르는 수확 절정기입니다. 12월 말 수확이 종료될 때까지 정성스레 수확한 원물을 가공해 당해 연도 유자 생산 일정을 종료합니다.",
+            desc: "유자 본연의 화려하고 진한 완숙 향이 가득 차오르는 수확 절정기입니다. 수확은 12월 중순에 끝나며, 그 뒤부터 1월 중순 판매 마감까지는 수확해 저장해 둔 유자로 보내드립니다.",
             imgSrc: "images/calendar/month-12.jpg?v=3.6",
             subHtml: `<div class="info-tag-box yellow-border">
                         <span class="info-tag">🍊 향미 추천: 깊고 묵직하며 달콤함이 최고조에 달한 오리지널 완숙 유자의 향을 느껴보세요.</span>
