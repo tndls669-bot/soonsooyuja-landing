@@ -3415,3 +3415,153 @@ section {
         margin-bottom: 24px;
     }
 }
+
+
+/* Season Notice (below hero) */
+.season-notice {
+    background-color: var(--bg-primary);
+    padding: 44px 20px;
+    border-bottom: var(--border-subtle);
+}
+
+.season-notice-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "head cta"
+        "steps steps";
+    align-items: center;
+    gap: 22px 30px;
+}
+
+.season-notice-head { grid-area: head; }
+.season-steps { grid-area: steps; }
+.season-notice-cta { grid-area: cta; }
+
+.season-notice-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-olive);
+    background-color: var(--color-olive-light);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-full);
+    margin-bottom: 10px;
+}
+
+.season-notice-title {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    line-height: 1.5;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.season-notice-title strong {
+    color: var(--color-olive);
+}
+
+.season-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.season-step {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 18px;
+    border-radius: var(--border-radius-md);
+    border: var(--border-subtle);
+    background-color: var(--color-white);
+    color: var(--color-muted);
+    word-break: keep-all;
+}
+
+.season-step-when {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.season-step-what {
+    font-size: 0.95rem;
+    color: var(--color-primary);
+}
+
+.season-step.is-now {
+    border-color: var(--color-olive);
+    background-color: var(--color-olive-light);
+}
+
+.season-step.is-now .season-step-when {
+    color: var(--color-olive);
+}
+
+.season-step.is-now .season-step-when::after {
+    content: "  지금";
+    margin-left: 6px;
+    font-size: 0.7rem;
+    color: var(--color-white);
+    background-color: var(--color-olive);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-full);
+}
+
+.season-notice-cta {
+    display: inline-block;
+    white-space: nowrap;
+    background-color: var(--color-olive);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 14px 26px;
+    border-radius: var(--border-radius-full);
+}
+
+@media (max-width: 700px) {
+    .season-notice {
+        padding: 28px 16px;
+    }
+
+    .season-notice-inner {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "head"
+            "steps"
+            "cta";
+        gap: 16px;
+    }
+
+    .season-notice-title {
+        font-size: 1.1rem;
+    }
+
+    .season-steps {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .season-step {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+    }
+
+    .season-step-what {
+        text-align: right;
+        font-size: 0.85rem;
+    }
+
+    .season-notice-cta {
+        text-align: center;
+    }
+}

@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=4.16">
+    <link rel="stylesheet" href="styles.css?v=4.18">
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -199,6 +199,31 @@
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <!-- 시즌 안내: 유자 생과 판매 기간 (매년 날짜만 바꿈) -->
+        <section class="season-notice" id="season-notice" aria-label="유자 생과 시즌 안내">
+            <div class="season-notice-inner">
+                <div class="season-notice-head">
+                    <span class="season-notice-label">2026 유자 생과 시즌</span>
+                    <p class="season-notice-title">유기농 유자 생과, <strong>1월 중순까지</strong> 판매합니다</p>
+                </div>
+                <ol class="season-steps">
+                    <li class="season-step" data-until="2026-12-15">
+                        <span class="season-step-when">11월 ~ 12월 중순</span>
+                        <span class="season-step-what">그때그때 수확한 유자</span>
+                    </li>
+                    <li class="season-step" data-until="2027-01-15">
+                        <span class="season-step-when">12월 중순 ~ 1월 중순</span>
+                        <span class="season-step-what">수확을 마치고 저장해 둔 유자</span>
+                    </li>
+                    <li class="season-step" data-until="9999-12-31">
+                        <span class="season-step-when">1월 중순</span>
+                        <span class="season-step-what">올해 판매 마감</span>
+                    </li>
+                </ol>
+                <a href="#fresh-fruit-shop" class="season-notice-cta">유자 생과 구매하기</a>
             </div>
         </section>
 
@@ -825,6 +850,6 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Script -->
-    <script src="script.js?v=4.15"></script>
+    <script src="script.js?v=4.16"></script>
 </body>
 </html>

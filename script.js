@@ -740,3 +740,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultMonth = new Date().getMonth() + 1;
     updateMonthDetails(defaultMonth, true);
 });
+
+
+/* 시즌 안내: 오늘 날짜에 해당하는 단계에 '지금' 표시 */
+(function () {
+    const steps = document.querySelectorAll('.season-step[data-until]');
+    if (!steps.length) return;
+    const today = new Date().toISOString().slice(0, 10);
+    for (const step of steps) {
+        if (today <= step.dataset.until) { step.classList.add('is-now'); break; }
+    }
+})();
